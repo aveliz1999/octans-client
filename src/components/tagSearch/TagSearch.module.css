@@ -1,0 +1,58 @@
+.container {
+    position: relative;
+}
+
+.searchContainer {
+    display: flex;
+    flex-direction: row;
+    background: white;
+    border: 1px solid black;
+    height: 40px;
+    align-items: center;
+    font-size: 14pt;
+    padding-left: 5px;
+}
+
+.input {
+    height: 38px;
+    border: 0;
+    outline: none;
+    padding-left: 2px;
+    font-size: 14pt;
+    flex: 1;
+}
+
+.tag {
+    border: 1px solid black;
+    border-radius: 8px;
+    margin-right: 3px;
+    position: relative;
+    padding: 5px 15px 5px 5px;
+}
+
+.suggestions {
+    width: 100%;
+    position: absolute;
+    top: 42px;
+}
+
+.suggestion {
+    background: #97928f;
+    height: 25px;
+    font-size: 14pt;
+    border-bottom: 1px solid black;
+    cursor: pointer;
+}
+
+.suggestion:hover {
+    background: #b8b6b4;
+}
+
+.removeTag {
+    border: none;
+    background: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
