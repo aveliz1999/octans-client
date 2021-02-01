@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import styles from './TagSearch.module.css';
 
-type Tag = {
+export type Tag = {
     id: number,
     namespace: string,
     tagName: string,
@@ -40,13 +40,16 @@ export default function TagSearch(props: TagSearchProps) {
 
     }, [typedTag]);
 
+    useEffect(() => {
+        props.onTagsUpdated(tags);
+    }, [tags])
+
     function addTag(tag: Tag) {
         if(tags.some(t => t.id === tag.id)) {
             return;
         }
         setTags(tags.concat(tag));
         setTypedTag('');
-        props.onTagsUpdated(tags);
     }
 
     function removeTag(tag: Tag) {
