@@ -24,19 +24,21 @@ export default function Home() {
     const [tags, setTags] = useState<Tag[]>([]);
 
     async function fetchNewImages() {
-        const a = await axios.post('/api/media/search', {
+        const result = await axios.post('/api/media/search', {
             tags: tags.map(tag => tag.id),
             after: afterId
         });
-        if(a.data.length) {
-            setMedia(a.data);
-            setAfterId(a.data[a.data.length - 1].id);
+
+        setNext(result.data.hasNext);
+        if(result.data.media.length) {
+            setMedia([...media, ...result.data.media]);
+            setAfterId(result.data.media[result.data.media.length - 1].id);
         }
-        // TODO replace with actual check for there being more media
-        setNext(true)
     }
 
     useEffect(() => {
+        setAfterId(0);
+        setMedia([]);
         fetchNewImages();
     }, [tags])
 
@@ -46,7 +48,7 @@ export default function Home() {
             <TagSearch onTagsUpdated={setTags}/>
             <button>Up</button>
         </div>
-        <Gallery urls={media.map(m => m.hash)} hasNext={hasNext} fetchNewImages={fetchNewImages}/>
+        <Gallery urls={media.map(m => `/api/static/${m.hash}.thumbnail.png`)} hasNext={hasNext} fetchNewImages={fetchNewImages}/>
     </div>
 
 }
