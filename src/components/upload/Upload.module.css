@@ -1,0 +1,34 @@
+.container {
+
+}
+
+.topBar {
+
+}
+
+.fileList {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.file {
+    width: 384px;
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    text-align: center;
+}
+
+.loader {
+    width: 100%;
+}
+
+.media {
+    width: 384px;
+    height: 216px;
+}

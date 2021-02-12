@@ -4,6 +4,7 @@ import {UserContext} from "./context/User";
 import React, {useContext} from "react";
 import Gallery from "./components/gallery/Gallery";
 import Home from "./components/home/Home";
+import Upload from "./components/upload/Upload";
 
 export default function AppRouter() {
     const [user] = useContext(UserContext);
@@ -14,6 +15,9 @@ export default function AppRouter() {
                 user ? <>
                     <Route exact path="/home">
                         <Home/>
+                    </Route>
+                    <Route exact path="/upload">
+                        <Upload/>
                     </Route>
                     <Route path="/">
                         <Redirect to="/home"/>
