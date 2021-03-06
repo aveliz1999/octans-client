@@ -1,0 +1,27 @@
+.container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+}
+
+.media {
+    max-width: 100%;
+    object-fit: none;
+}
+
+.exitButton {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: red;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
