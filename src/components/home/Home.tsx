@@ -4,22 +4,11 @@ import styles from './Home.module.css';
 import TagSearch, {Tag} from "../tagSearch/TagSearch";
 import Gallery from "../gallery/Gallery";
 import {Redirect} from "react-router-dom";
-
-type Media = {
-    id: number,
-    hash: string,
-    mediaType: string,
-    width: number,
-    height: number,
-    duration: number,
-    size: number,
-    createdAt: string,
-    updatedAt: string
-}
+import {MediaType} from "../media/Media";
 
 export default function Home() {
 
-    const [media, setMedia] = useState<Media[]>([])
+    const [media, setMedia] = useState<MediaType[]>([])
     const [hasNext, setNext] = useState(false);
     const [afterId, setAfterId] = useState(0);
     const [tags, setTags] = useState<Tag[]>([]);
@@ -52,7 +41,7 @@ export default function Home() {
             <TagSearch onTagsUpdated={setTags}/>
             <button onClick={() => {setRedirectToUpload(true)}}>Up</button>
         </div>
-        <Gallery urls={media.map(m => `/api/static/${m.hash}.thumbnail.png`)} hasNext={hasNext} fetchNewImages={fetchNewImages}/>
+        <Gallery media={media} hasNext={hasNext} fetchNewImages={fetchNewImages}/>
     </div>
 
 }

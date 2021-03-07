@@ -26,9 +26,9 @@ export default function Media(props: MediaProps) {
         {
             props.media.duration ?
                 <video className={styles.media} controls autoPlay>
-                    <source src={`/api/media/${props.media.hash}.mp4`} type="video/mp4"/>
+                    <source src={`/api/media/download/${props.media.hash}.mp4`} type="video/mp4"/>
                 </video> :
-                <img className={styles.media} src={`/api/media/${props.media.hash}.png`}/>
+                <img className={styles.media} src={`/api/media/download/${props.media.hash}.png`}/>
         }
         <div className={styles.exitButton} onClick={props.onExit}>
             Close

@@ -26,7 +26,7 @@ export default function Gallery(props: GalleryProps) {
             !currentMedia && <>
                 <div className={styles.gallery}>
                     {
-                        props.media.map(media => <img className={styles.image} key={media.id} src={`/api/media/${media.hash}/true.png`} onClick={() => {
+                        props.media.map(media => <img className={styles.image} key={media.id} src={`/api/media/download/${media.hash}/true.png`} onClick={() => {
                             setCurrentScroll(window.scrollY);
                             setCurrentMedia(media);
                         }}/>)
