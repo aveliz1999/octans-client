@@ -11,13 +11,15 @@ export type Tag = {
 }
 
 type TagSearchProps = {
-    onTagsUpdated: (tags: Tag[]) => void
+    onTagAdded: (tag: Tag) => void,
+    onTagRemoved: (tag: Tag) => void,
+    tags: Tag[],
+    displayTags: boolean
 }
 
-export default function TagSearch(props: TagSearchProps) {
+export default function TagSearch({onTagAdded, onTagRemoved, tags, displayTags}: TagSearchProps) {
     const [typedTag, setTypedTag] = useState('');
     const [tagSuggestions, setTagSuggestions] = useState<Tag[]>([]);
-    const [tags, setTags] = useState<Tag[]>([]);
 
     useEffect(() => {
         if(typedTag) {
@@ -40,20 +42,16 @@ export default function TagSearch(props: TagSearchProps) {
 
     }, [typedTag]);
 
-    useEffect(() => {
-        props.onTagsUpdated(tags);
-    }, [tags])
-
     function addTag(tag: Tag) {
         if(tags.some(t => t.id === tag.id)) {
             return;
         }
-        setTags(tags.concat(tag));
+        onTagAdded(tag);
         setTypedTag('');
     }
 
     function removeTag(tag: Tag) {
-        setTags(tags.filter(t => t.id !== tag.id));
+        onTagRemoved(tag);
     }
 
     return <div className={styles.container}>

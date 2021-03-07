@@ -13,7 +13,6 @@ export default function Home() {
     const [afterId, setAfterId] = useState(0);
     const [tags, setTags] = useState<Tag[]>([]);
     const [redirectToUpload, setRedirectToUpload] = useState(false);
-
     async function fetchNewImages() {
         const result = await axios.post('/api/media/search', {
             tags: tags.map(tag => tag.id),
@@ -27,6 +26,14 @@ export default function Home() {
         }
     }
 
+    function addTag(tag: Tag) {
+        setTags([...tags, tag]);
+    }
+
+    function removeTag(tag: Tag) {
+        setTags(tags.filter(t => t.id !== tag.id));
+    }
+
     useEffect(() => {
         setAfterId(0);
         setMedia([]);
@@ -38,7 +45,7 @@ export default function Home() {
     }
     return <div>
         <div className={styles.topBar}>
-            <TagSearch onTagsUpdated={setTags}/>
+            <TagSearch onTagAdded={addTag} onTagRemoved={removeTag} tags={tags} displayTags={true}/>
             <button onClick={() => {setRedirectToUpload(true)}}>Up</button>
         </div>
         <Gallery media={media} hasNext={hasNext} fetchNewImages={fetchNewImages}/>
