@@ -37,8 +37,11 @@ export default function Home() {
     useEffect(() => {
         setAfterId(0);
         setMedia([]);
-        fetchNewImages();
     }, [tags])
+
+    useEffect(() => {
+        fetchNewImages();
+    }, [media]);
 
     if(redirectToUpload) {
         return <Redirect to="/upload"/>
