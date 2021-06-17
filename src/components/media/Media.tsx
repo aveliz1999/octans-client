@@ -1,4 +1,7 @@
 import styles from './Media.module.css';
+import React, {useEffect, useState} from "react";
+import TagSearch, {Tag} from "../tagSearch/TagSearch";
+import axios from "axios";
 
 export type MediaType = {
     id: number,
@@ -19,6 +22,33 @@ type MediaProps = {
 
 export default function Media(props: MediaProps) {
 
+    const [tags, setTags] = useState<Tag[]>([]);
+
+    async function addTag(tag: Tag) {
+        setTags([...tags, tag]);
+        try {
+            await axios.post(`/api/media/${props.media?.id}/tag`, {
+                tagId: tag.id
+            });
+        }
+        catch(err) {
+            // TODO handle post error
+            console.error(err);
+            setTags(tags.filter(t => t.id !== tag.id));
+        }
+    }
+
+    useEffect(() => {
+        if(!props.media) {
+            return;
+        }
+
+        axios.get(`/api/media/${props.media.id}/tags`)
+            .then(result => {
+                setTags(result.data);
+            });
+    }, [props.media])
+
     if(!props.media) {
         return <></>
     }
@@ -33,6 +63,8 @@ export default function Media(props: MediaProps) {
         <div className={styles.exitButton} onClick={props.onExit}>
             Close
         </div>
+        <TagSearch onTagAdded={addTag} onTagRemoved={()=>{}} tags={tags} displayTags={false}/>
+
     </div>
 
 }
