@@ -38,6 +38,18 @@ export default function Media(props: MediaProps) {
         }
     }
 
+    async function removeTag(tag: Tag) {
+        setTags(tags.filter(t => t.id !== tag.id));
+        try {
+            await axios.delete(`/api/media/${props.media?.id}/tag/${tag.id}`);
+        }
+        catch(err) {
+            // TODO handle error
+            console.error(err);
+            setTags([...tags, tag]);
+        }
+    }
+
     useEffect(() => {
         if(!props.media) {
             return;
@@ -64,7 +76,21 @@ export default function Media(props: MediaProps) {
             Close
         </div>
         <TagSearch onTagAdded={addTag} onTagRemoved={()=>{}} tags={tags} displayTags={false}/>
-
+        <div className={styles.tags}>
+            {
+                tags.map(tag => <div className={styles.tag}>
+                    {
+                        tag.namespace ? `${tag.namespace}:` : ''
+                    }
+                    {
+                        tag.tagName
+                    }
+                    <button className={styles.removeTag} onClick={() => removeTag(tag)}>
+                        x
+                    </button>
+                </div>)
+            }
+        </div>
     </div>
 
 }

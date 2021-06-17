@@ -25,3 +25,30 @@
     align-items: center;
     cursor: pointer;
 }
+
+.tags {
+    margin-top: 10px;
+    min-height: 100px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.tag {
+    font-size: 14pt;
+    height: 22px;
+    border: 1px solid black;
+    border-radius: 8px;
+    margin-right: 3px;
+    position: relative;
+    padding: 5px 15px 5px 5px;
+}
+
+.removeTag {
+    border: none;
+    background: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
