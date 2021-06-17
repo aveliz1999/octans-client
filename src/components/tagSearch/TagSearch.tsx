@@ -57,7 +57,7 @@ export default function TagSearch({onTagAdded, onTagRemoved, tags, displayTags}:
     return <div className={styles.container}>
         <div className={styles.searchContainer}>
             {
-                tags.map(tag => {
+                displayTags && tags.map(tag => {
                     return <div className={styles.tag}>
                         {
                             tag.namespace ? `${tag.namespace}:` : ''
